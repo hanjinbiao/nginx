@@ -1,0 +1,48 @@
+#!/bin/bash
+Error_P(){
+	echo "####################"
+	echo "###  nginx 参数  ###"
+	echo "####################"
+	echo "#参数：            #"
+	echo "#------------------#"
+	echo "# start    开启    #"
+	echo "# restart  重启    #"
+	echo "# stop     关闭    #"
+	echo "# reload   加载配置#"
+	echo "# status   查看状态#"
+	echo "# enable   开机自启#"
+	echo "# disable  关闭自启#"
+	echo "# check    检查配置#"
+	echo "#------------------#"
+	echo "#     小心BUG      #"
+	echo "####################"
+}
+
+case $1 in
+start)
+	/usr/local/nginx/sbin/nginx;;
+stop)
+	/usr/local/nginx/sbin/nginx -s stop;;
+status)
+	num=`pgrep nginx | wc -l`
+	if [ $num -ne 0 ];then
+		echo -e "\033[32mNginx is Running\033[0m"
+	else
+		echo -e "\033[31mNginx Not Running\033[0m"
+	fi;;
+reload)
+	/usr/local/nginx/sbin/nginx -s reload;;
+restart)
+	/usr/local/nginx/sbin/nginx -s stop
+	sleep 0.2
+	/usr/local/nginx/sbin/nginx;;
+enable)
+	echo "/usr/local/nginx/sbin/nginx" >> /etc/rc.d/rc.local
+	chmod +x /etc/rc.d/rc.local;;
+disable)
+	sed -i '/nginx$/d' /etc/rc.d/rc.local;;
+check)
+	/usr/local/nginx/sbin/nginx -t;;
+*)
+	Error_P
+esac
