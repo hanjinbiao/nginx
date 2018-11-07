@@ -1,5 +1,5 @@
 ### 这几天学习关于nginx的一个分享
-
+#### 安装:rpm -ivh ./rpm/nginx-1.12.2-1.x86_64.rpm
 ### ./rpm  
 #### 制作了一个nginx-1.12.2的rpm：
   ##### a.rpm 中在基础的模块上加载了http_ssl_module | stream | http_stub_status_module 模块
