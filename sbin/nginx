@@ -24,8 +24,8 @@ start)
 stop)
 	/usr/local/nginx/sbin/nginx -s stop;;
 status)
-	num=`pgrep nginx | wc -l`
-	if [ $num -ne 0 ];then
+	num=`s -antulp | grep nginx | awk '/users:\(\(\"nginx/{print $7}' | wc -l`
+	if [ $num -gt 0 ];then
 		echo -e "\033[32mNginx is Running\033[0m"
 	else
 		echo -e "\033[31mNginx Not Running\033[0m"
