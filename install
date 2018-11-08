@@ -1,0 +1,22 @@
+#! /bin/bash
+
+version=1.12.2
+read -p "请输入下载位置主目录（默认为：/root) " pwd
+cd pwd
+
+rpm -ivh ./rpm/nginx-${version}.tar.gz &> /dev/null
+
+if [ $? -eq 0 ];then
+	echo "Nginx-${version}已安装完成"
+else
+	echo "Nginx-${version}安装失败"
+fi
+
+
+		
+
+
+
+
+
+
